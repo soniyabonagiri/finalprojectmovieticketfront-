@@ -6,10 +6,9 @@ import { useContext } from 'react';
 import { Storecontext } from '../context/Storecontext';
 import {useNavigate} from 'react-router-dom'
 
-// import { Link } from "react-router";
-
 const Navbar = ({ showsignin, setshowsignin }) => {
     const navigate=useNavigate();
+
 
     const [Movievar, setMovie] = useState('Home');
     const { getTotalCartAmount, token, setToken } = useContext(Storecontext)
@@ -19,8 +18,6 @@ const Navbar = ({ showsignin, setshowsignin }) => {
         setToken("");
         //when the user logout, we have to send him to home page- use navigate hook.
         navigate('/')
-    
-    
         
       }
     
@@ -56,11 +53,13 @@ const Navbar = ({ showsignin, setshowsignin }) => {
                     <div className='navbar-profile'>
                         <img className='profileclass' src={assets.profile} alt="" />
                         <ul className="nav-profile-dropdown">
-                            <li><img src={assets.booked} alt="" /><p>Booked</p></li>
+                            <li onClick={()=>navigate('/myorders')} ><img src={assets.booked} alt="" /><p >Booked</p></li>
                             {/* <hr /> */}
                             <li onClick={logout}><img src={assets.logout} alt="" /><p>Logout</p></li>
                         </ul>
                     </div>}
+
+                    
 
 
 

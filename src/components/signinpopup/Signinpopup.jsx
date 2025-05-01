@@ -66,7 +66,7 @@ const Signinpopup = ({showsignin,setshowsignin}) => {
    }
 
     return (
-        <div className='login-popup'>
+        <div className='login-popup' >
             <form onSubmit={onLogin} action="" className='login-popup-container'>
                 <div className="login-popup-title">
                     <h2>{currState}</h2>

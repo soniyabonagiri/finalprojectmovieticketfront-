@@ -1,6 +1,7 @@
 import React, { createContext, useCallback, useEffect, useState } from 'react'
 // import { movie_name_list } from '../assets/assets';
 import axios from 'axios'
+import { Alert } from 'bootstrap';
 export const Storecontext = createContext(null);
 
 const StoreContextProvider = (props) => {
@@ -25,16 +26,35 @@ const StoreContextProvider = (props) => {
 
     // const [selectedSeats, setSelectedSeats] = useState([]);
 
-    const addtocart = (itemId) => {
+    const addtocart =async (itemId) => {
         if (!cartitems[itemId]) {
             setcartitems(prev => ({ ...prev, [itemId]: 1 }))
         }
         else {
             setcartitems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }))
         }
+        if(!token){
+            console.log('login');
+
+            
+        }
+        else{
+            await axios.post(url+"/api/cart/add",{itemId},{headers:{token}})
+
+        }
+        
+
     }
-    const removeFromCart = (itemId) => {
+
+
+
+    const removeFromCart =async (itemId) => {
         setcartitems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }))
+
+        if(token){
+            await axios.post(url+"/api/cart/remove",{itemId},{headers:{token}})
+        }
+
     }
 
 
@@ -75,26 +95,26 @@ const StoreContextProvider = (props) => {
 
 
 
-      const fetchTheaterDetails = useCallback(async (theaterId) => {
-        setLoading(true);
-        try {
-          // Example API endpoints - adjust as per your backend
-          const [theaterRes, moviesRes, showtimesRes] = await Promise.all([
-            axios.get(`/api/theaters/${theaterId}`),
-            axios.get(`/api/theaters/${theaterId}/movies`),
-            axios.get(`/api/theaters/${theaterId}/showtimes`)
-          ]);
+    //   const fetchTheaterDetails = useCallback(async (theaterId) => {
+    //     setLoading(true);
+    //     try {
+    //       // Example API endpoints - adjust as per your backend
+    //       const [theaterRes, moviesRes, showtimesRes] = await Promise.all([
+    //         axios.get(`/api/theaters/${theaterId}`),
+    //         axios.get(`/api/theaters/${theaterId}/movies`),
+    //         axios.get(`/api/theaters/${theaterId}/showtimes`)
+    //       ]);
     
-          setTheater(theaterRes.data);
-          setMovies(moviesRes.data);
-          setShowtimes(showtimesRes.data);
-          setError(null);
-        } catch (err) {
-          console.error(err);
-          setError('Failed to fetch theater details');
-        } finally {
-          setLoading(false);
-        }},[]);
+    //       setTheater(theaterRes.data);
+    //       setMovies(moviesRes.data);
+    //       setShowtimes(showtimesRes.data);
+    //       setError(null);
+    //     } catch (err) {
+    //       console.error(err);
+    //       setError('Failed to fetch theater details');
+    //     } finally {
+    //       setLoading(false);
+    //     }},[]);
 
 
     useEffect(() => {
@@ -103,7 +123,13 @@ const StoreContextProvider = (props) => {
     }, [cartitems])
 
 
-
+    const loadCartData=async (token)=>{
+        const response=await axios.post(url+"/api/cart/get",{},{headers:{token}});
+        setcartitems(response.data.cartData);
+    
+    
+    }
+    
 
     useEffect(()=>{
         
@@ -112,6 +138,8 @@ const StoreContextProvider = (props) => {
             await fetchmovieList()
             if(localStorage.getItem("token")){
                 setToken(localStorage.getItem("token"))
+                await loadCartData(localStorage.getItem("token"))
+
         
             }
         } 
@@ -146,7 +174,7 @@ const StoreContextProvider = (props) => {
         showtimes,
         loading,
         error,
-        fetchTheaterDetails,
+        // fetchTheaterDetails,
         url, token,
         setToken,
         fetchmovieList

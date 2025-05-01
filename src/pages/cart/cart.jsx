@@ -2,16 +2,32 @@ import React, { useContext } from 'react'
 import { Storecontext } from '../../context/Storecontext'
 import './cart.css'
 import { Link } from 'react-router-dom'
-import { useLocation } from 'react-router-dom';
+import { useLocation,useNavigate } from 'react-router-dom';
+import axios from 'axios'
 
 
 
 const cart = () => {
-  const { cartitems, movie_name_list, removeFromCart, getTotalCartAmount,url } = useContext(Storecontext);
+  const {token, cartitems, movie_name_list, removeFromCart, getTotalCartAmount,url } = useContext(Storecontext);
   const location = useLocation();
+  const navigate=useNavigate();
   const selectedSeatsData = location.state;
 
+// const paymentFunction=async ()=>{
+//   // e.preventDefault();
+//     console.log('payment function called!');
+//     let response=await axios.post('http://localhost:4000/api/order/place',{},{headers:{token}});
+//     if(response && response.status===200){
+//       window.location.href=response.data.url
+//       console.log(response.data);
+//     }
+//     else{
+//       console.log('Error')
+//     }
 
+
+
+// }
 
 
   return (
@@ -107,11 +123,11 @@ const cart = () => {
               <div>
 
 
-                <p>🎟 Selected Seats for {selectedSeatsData.movieName}: {selectedSeatsData.selectedSeats.join(', ')}</p>
-                <p>🪑 Total Seats: {selectedSeatsData.seatsToSelect}</p>
-                <p>💰 Total Price: Rs {getTotalCartAmount()}</p>
+                <p>Selected Seats for {selectedSeatsData.movieName}: {selectedSeatsData.selectedSeats.join(', ')}</p>
+                <p> Total Seats: {selectedSeatsData.seatsToSelect}</p>
+                <p>Total Price: Rs {getTotalCartAmount()}</p>
 
-                <Link to="/payment" state={{
+                <h4 state={{
                   movieName: selectedSeatsData.movieName,
                   selectedSeats: selectedSeatsData.selectedSeats,
                   // seatsToSelect: selectedSeatsData.seatsToSelect,
@@ -121,8 +137,10 @@ const cart = () => {
                   bookingDate: new Date().toLocaleDateString(),
                   bookingTime: new Date().toLocaleTimeString()
                 }}>
+                  <Link to='/orders'>
                   <button>Book Now</button>
-                </Link>
+                  </Link>
+                </h4>
               </div>
             )}
 
