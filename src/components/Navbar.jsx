@@ -34,13 +34,6 @@ const Navbar = ({ showsignin, setshowsignin }) => {
 
                 <a href='#app-download' onClick={() => setMovie('MobileApp')} className={Movievar === 'MobileApp' ? 'active' : ""}>MobileApp</a>
 
-                {/* <a href='/theater' onClick={() => setMovie('Theaters')} className={Movievar === 'Theater' ? 'active' : ""}>Theaters</a> */}
-
-
-
-
-
-                {/* <li onClick={() => setMovie('Cart')} className={Movievar === 'Cart' ? 'active' : ""}>Cart</li> */}
             </ul>
             <div className='navbarright'>
                 <img className='serachbtn' src={assets.search} alt="serach logo" />
@@ -53,7 +46,7 @@ const Navbar = ({ showsignin, setshowsignin }) => {
                     <div className='navbar-profile'>
                         <img className='profileclass' src={assets.profile} alt="" />
                         <ul className="nav-profile-dropdown">
-                            <li onClick={()=>navigate('/myorders')} ><img src={assets.booked} alt="" /><p >Booked</p></li>
+                            {/* <li onClick={()=>navigate('/myorders')} ><img src={assets.booked} alt="" /><p >Booked</p></li> */}
                             {/* <hr /> */}
                             <li onClick={logout}><img src={assets.logout} alt="" /><p>Logout</p></li>
                         </ul>

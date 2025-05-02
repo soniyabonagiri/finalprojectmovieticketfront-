@@ -9,25 +9,16 @@ import { useNavigate } from 'react-router-dom';
 const Movielist = ({ id, name, image, price, description }) => {
 
     const navigate=useNavigate();
-    // const [itemcount,setitemcount]=useState(0);
-    // useReducer()
+    
     const { cartitems, addtocart, removeFromCart, url } = useContext(Storecontext)
-    const handle = () => {
-        const token1 = localStorage.getItem('token');
-        if (!token1) {
-            alert('Please log in to add items to the cart');
-            navigate('/register');
-            return;
-        }
-
-    }
+    
 
     return (
         <div className='movie_list'>
             <div className="movie_list_image_container">
                 <img className="movie_list-image" src={url + "/images/" + image} alt="movieimage" />
                 {
-                    !cartitems[id] ? <button onClick={handle()} className='add' onClick={() => addtocart(id)}>Book Now</button> :
+                    !cartitems[id] ? <button  className='add' onClick={() => addtocart(id)}>Book Now</button> :
                         <div className='movie_item_count'>
                             <img onClick={() => removeFromCart(id)} src={assets.removeicon} alt="-img" />
                             <p>{cartitems[id]}</p>

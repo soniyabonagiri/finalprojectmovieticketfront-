@@ -6,19 +6,20 @@ import { useLocation } from 'react-router-dom';
 import './Paymentpage.css'
 
 const Paymentpage = () => {
-// const {seats,setSeats,setSelectedSeats,selectedSeats}=useContext(Storecontext)
-const [cardName, setCardName] = useState('');
+  const { seats, setSeats, setSelectedSeats, selectedSeats } = useContext(Storecontext)
+  const [cardName, setCardName] = useState('');
   const [cardNumber, setCardNumber] = useState('');
   const [expiry, setExpiry] = useState('');
   const [cvv, setCvv] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
-  const {getTotalCartAmount}=useContext(Storecontext)
+  const { getTotalCartAmount } = useContext(Storecontext)
   // const seatPrice = 200;
 
   // const totalAmount = selectedSeats.length * seatPrice;
   const location = useLocation();
-  const { movieName, selectedSeats, seatsToSelect, totalAmount } = location.state || {};
+  const { movieName, selectedSeat, seatsToSelect, totalAmount } = location.state || {};
 
+  const navigate=useNavigate();
 
 
 
@@ -33,7 +34,7 @@ const [cardName, setCardName] = useState('');
     setIsProcessing(true);
 
     setTimeout(() => {
-      alert('🎉 Payment successful!');
+      alert(`🎉 Payment successful! ${getTotalCartAmount()}`);
       navigate('/confirmation'); // Navigate to confirmation page
     }, 1500);
   };
@@ -41,7 +42,6 @@ const [cardName, setCardName] = useState('');
   return (
     <div className="payment-container">
       <h2>Payment</h2>
-      <p><strong>Seats:</strong> {selectedSeats.join(', ')}</p>
       <p><strong>Total:</strong> ₹{getTotalCartAmount()}</p>
 
       <form onSubmit={handlePayment} className="payment-form">
@@ -73,12 +73,12 @@ const [cardName, setCardName] = useState('');
           maxLength={3}
         />
         <button type="submit" disabled={isProcessing}>
-          {isProcessing ? 'Processing...' : 'Pay ₹' +getTotalCartAmount()}
+          {isProcessing ? 'Processing...' : 'Pay ₹' + getTotalCartAmount()}
         </button>
       </form>
     </div>
 
-    
+
   )
 }
 

@@ -8,12 +8,12 @@ import StoreProvider, { Storecontext } from './context/Storecontext.jsx'
 createRoot(document.getElementById('root')).render(
 
   <BrowserRouter>
+
     <StoreProvider>
+
       <App />
 
     </StoreProvider>
-
-
 
   </BrowserRouter>
 )

@@ -90,32 +90,6 @@ const StoreContextProvider = (props) => {
         // Here, you would typically make an API call to save the reservation to the server
       };
 
-    
-
-
-
-
-    //   const fetchTheaterDetails = useCallback(async (theaterId) => {
-    //     setLoading(true);
-    //     try {
-    //       // Example API endpoints - adjust as per your backend
-    //       const [theaterRes, moviesRes, showtimesRes] = await Promise.all([
-    //         axios.get(`/api/theaters/${theaterId}`),
-    //         axios.get(`/api/theaters/${theaterId}/movies`),
-    //         axios.get(`/api/theaters/${theaterId}/showtimes`)
-    //       ]);
-    
-    //       setTheater(theaterRes.data);
-    //       setMovies(moviesRes.data);
-    //       setShowtimes(showtimesRes.data);
-    //       setError(null);
-    //     } catch (err) {
-    //       console.error(err);
-    //       setError('Failed to fetch theater details');
-    //     } finally {
-    //       setLoading(false);
-    //     }},[]);
-
 
     useEffect(() => {
         console.log(cartitems);
