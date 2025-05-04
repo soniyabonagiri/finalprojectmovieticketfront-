@@ -1,3 +1,4 @@
+
 import React, { createContext, useCallback, useEffect, useState } from 'react'
 // import { movie_name_list } from '../assets/assets';
 import axios from 'axios'
@@ -61,13 +62,21 @@ const StoreContextProvider = (props) => {
 
     const getTotalCartAmount = () => {
         let totalAmount = 0;
+         
+            
+            for (const itemId in cartitems) {
+                if (cartitems[itemId] > 0) {
+                    let itemInfo = movie_name_list.find((product) => product._id === itemId);
+                    if(itemInfo){
+                        
+                        totalAmount = totalAmount + itemInfo.price * cartitems[itemId];
+                    }
+                    else{
+                        console.log('product not found ')
 
-
-        for (const item in cartitems) {
-            if (cartitems[item] > 0) {
-                let itemInfo = movie_name_list.find((product) => product._id === item)
-                totalAmount = totalAmount + itemInfo.price * cartitems[item]
-            }
+                    }
+                }
+            
         }
         return totalAmount;
 
@@ -165,3 +174,8 @@ const StoreContextProvider = (props) => {
 
 }
 export default StoreContextProvider
+
+
+
+
+

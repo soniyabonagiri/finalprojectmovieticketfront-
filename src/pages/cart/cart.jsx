@@ -4,6 +4,7 @@ import './cart.css'
 import { Link } from 'react-router-dom'
 import { useLocation,useNavigate } from 'react-router-dom';
 import axios from 'axios'
+import { useEffect } from 'react';
 
 
 
@@ -12,6 +13,18 @@ const cart = () => {
   const location = useLocation();
   const navigate=useNavigate();
   const selectedSeatsData = location.state;
+
+  useEffect(() => {
+    if (!token) {
+      alert("Please login first.");
+      navigate("/login");
+    }
+  }, [token]);
+  
+  useEffect(()=>{
+    console.log(cartitems)
+},[cartitems])
+
 
 // const paymentFunction=async ()=>{
 //   // e.preventDefault();
