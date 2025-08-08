@@ -7,7 +7,7 @@ export const Storecontext = createContext(null);
 
 const StoreContextProvider = (props) => {
 
-    let url='http://localhost:4000'
+    let url='https://backendproject-1-2.onrender.com'
     const [token,setToken]=useState("")
 
 
