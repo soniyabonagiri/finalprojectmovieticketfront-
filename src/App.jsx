@@ -4,7 +4,8 @@ import './App.css'
 
 import {Route, Routes} from 'react-router-dom'
 
-import Home from './pages/home/Home' 
+import Home from './pages/Home/Home' 
+
 // import Showtime from './pages/showtime/Showtime'
 import Movies from './pages/Movies/Movies'
 
