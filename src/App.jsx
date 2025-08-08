@@ -17,7 +17,7 @@ import Placeorder from './pages/orders/Placeorder'
 import SeatSelection from './components/seatselection/SeatSelection'
 import Paymentpage from './components/payment/Paymentpage'
 import Myorders from './pages/myorders/Myorders'
-import Confirm from './pages/confirm'
+import Confirm from './pages/Confirm'
 
 const App = () => {
 
